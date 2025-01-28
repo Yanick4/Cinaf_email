@@ -11,12 +11,10 @@ export class OneSignalService {
       appId: "6813c394-dfeb-4141-976a-74c9f6178f8a",
       serviceWorkerParam: { scope: '/' },
       serviceWorkerPath:'/OneSignalSDKWorker.js'
-    }).then((user)=>{
-      console.log(user)
+    }).then(() => {
+      this.oneSignal.User.PushSubscription.addEventListener("change", (event) => {
+        console.log("Push subscription change", event);
+      })
     })
-  }
-
-  public getUserId(){
-    
   }
 }
