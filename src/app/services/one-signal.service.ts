@@ -13,4 +13,8 @@ export class OneSignalService {
       serviceWorkerPath:'/OneSignalSDKWorker.js'
     })
   }
+
+  public getUserId(){
+    console.log(this.oneSignal.User)
+  }
 }
