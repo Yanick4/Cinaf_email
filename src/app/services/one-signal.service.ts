@@ -15,6 +15,6 @@ export class OneSignalService {
   }
 
   public getUserId(){
-    console.log(this.oneSignal.User)
+    console.log(this.oneSignal.User.PushSubscription.id,this.oneSignal.User.PushSubscription.token)
   }
 }
