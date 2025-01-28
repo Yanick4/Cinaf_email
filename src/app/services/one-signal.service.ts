@@ -13,7 +13,7 @@ export class OneSignalService {
       serviceWorkerPath:'/OneSignalSDKWorker.js'
     }).then(() => {
       this.oneSignal.User.PushSubscription.addEventListener("change", (event) => {
-        console.log("Push subscription change", event);
+        console.log("Push subscription change", event.current.id);
       })
     })
   }
