@@ -93,15 +93,21 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/OneSignalSDKWorker.js"
             ],
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/onesignal-cordova-plugin/www/OneSignal.js"
+            ]
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "e1c512e9-694f-421e-ab96-b9bc3cbbd5ce"
   }
 }

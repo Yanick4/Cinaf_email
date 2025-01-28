@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 4221",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -22,6 +22,8 @@
     "@angular/router": "^19.0.0",
     "@angular/ssr": "^19.0.6",
     "express": "^4.18.2",
+    "onesignal-cordova-plugin": "^5.2.9",
+    "onesignal-ngx": "^2.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
