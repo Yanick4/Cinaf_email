@@ -9,8 +9,8 @@ export class OneSignalService {
   public initOneSignal(){
     this.oneSignal.init({
       appId: "6813c394-dfeb-4141-976a-74c9f6178f8a",
-      serviceWorkerParam: { scope: '../../../' },
-      serviceWorkerPath:'OneSignalSDKWorker.js'
+      serviceWorkerParam: { scope: '/' },
+      serviceWorkerPath:'/OneSignalSDKWorker.js'
     })
   }
 }
