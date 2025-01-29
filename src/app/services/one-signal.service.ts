@@ -17,9 +17,6 @@ export class OneSignalService{
       serviceWorkerParam: { scope: '/' },
       serviceWorkerPath:'/OneSignalSDKWorker.js'
     }).then(() => {
-      this.oneSignal.User.PushSubscription.optIn().then((result) => {
-        console.log("Push subscription opt-in", result);
-      })
       this.oneSignal.User.PushSubscription.addEventListener("change", (event) => {
         if(event.current.id){
           this._http.register_player_id({player_id:event.current.id,authorizer:true}).subscribe({
@@ -27,12 +24,7 @@ export class OneSignalService{
             error:(err:HttpErrorResponse)=>console.log("Player id registration error",err),
             complete:()=>console.log("Player id registration complete")
           })
-        }else{
-          this.oneSignal.User.PushSubscription.optOut().then((result) => {
-            console.log("Push subscription opt-out", result);
-          })
         }
-        console.log("Push subscription change", event.current.id);
       })
     })
   }
