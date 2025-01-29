@@ -19,6 +19,9 @@ export class OneSignalService{
     }).then(() => {
       this.oneSignal.User.PushSubscription.addEventListener("change", (event) => {
         if(event.current.id){
+          navigator.serviceWorker.getRegistration().then((registration)=>{
+            console.log("Service worker registration",registration)
+          })
           this._http.register_player_id({player_id:event.current.id,authorizer:true}).subscribe({
             next:()=>console.log("Player id registered"),
             error:(err:HttpErrorResponse)=>console.log("Player id registration error",err),
