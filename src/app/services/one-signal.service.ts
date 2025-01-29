@@ -16,11 +16,7 @@ export class OneSignalService{
       appId: "6813c394-dfeb-4141-976a-74c9f6178f8a",
       serviceWorkerParam: { scope: '/' },
       serviceWorkerPath:'/OneSignalSDKWorker.js'
-    }).then((user) => {
-      console.log("OneSignal initialized", user);
-      this.oneSignal.User.PushSubscription.optIn().then((result) => {
-        console.log("Push subscription opt-in", result);
-      })
+    }).then(() => {
       this.oneSignal.User.PushSubscription.optIn().then((result) => {
         console.log("Push subscription opt-in", result);
       })
