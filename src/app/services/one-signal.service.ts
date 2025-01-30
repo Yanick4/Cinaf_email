@@ -25,6 +25,14 @@ export class OneSignalService{
               error:(err:HttpErrorResponse)=>console.log("Player id registration error",err),
               complete:()=>console.log("Player id registration complete")
             })
+          }else{
+            this.oneSignal.User.PushSubscription.optIn().then(()=>{
+              this._http.register_player_id({player_id:event.current.id,authorizer:true}).subscribe({
+                next:()=>console.log("Player id registered"),
+                error:(err:HttpErrorResponse)=>console.log("Player id registration error",err),
+                complete:()=>console.log("Player id registration complete")
+              })
+            })
           }
         })
       })
