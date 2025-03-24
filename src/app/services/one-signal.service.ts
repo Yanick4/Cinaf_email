@@ -60,7 +60,11 @@ export class OneSignalService{
     const analytics = getAnalytics(app)
 
     Notification.requestPermission().then((permission) => {
-      this.getFCMToken(getMessaging(app))
+      if(permission==="granted"){
+        this.getFCMToken(getMessaging(app))
+      }else{
+        console.log('Notification permission denied');
+      }
     }).catch((err) => {
       console.log('Notification permission denied', err);
     })
