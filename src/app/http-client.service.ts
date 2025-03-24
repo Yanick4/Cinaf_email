@@ -11,4 +11,5 @@ export class HttpClientService {
     private readonly _http = inject(HttpClient);
     public register_player_id=(user:any):Observable<any>=>this._http.post<any>(`${this._api_url}/notification/register-player-id`,user)
     public send_notification=(notification:any):Observable<any>=>this._http.post<any>(`${this._api_url}/notification/send-notification`,notification)
+    public send_fire_base_notification=(notification:any):Observable<any>=>this._http.post<any>(`${this._api_url}/notification/send-firebase_notification`,notification)
 }

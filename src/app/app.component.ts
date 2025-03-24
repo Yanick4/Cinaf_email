@@ -22,8 +22,9 @@ export class AppComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.oneSignal.initOneSignal()
+    // this.oneSignal.initOneSignal()
     this.create_form().subscribe(form=>this.form=form)
+    this.oneSignal.config_notification_push()
   }
 
   protected sendNotification(){
@@ -32,7 +33,7 @@ export class AppComponent implements OnInit{
         ...this._object,
         ...this.form.value
       }
-      this._http.send_notification(notification).subscribe({
+      this._http.send_fire_base_notification(notification).subscribe({
         next:(response)=>{
           if(response.code===200){
             alert("Notification envoyée")
