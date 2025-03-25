@@ -107,7 +107,8 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/onesignal-cordova-plugin/www/OneSignal.js"
+              "node_modules/onesignal-cordova-plugin/www/OneSignal.js",
+              "src/fire-messaging-sw.js"
             ]
           }
         }
