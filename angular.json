@@ -100,7 +100,8 @@
                 "glob": "**/*",
                 "input": "public"
               },
-              "src/OneSignalSDKWorker.js"
+              "src/OneSignalSDKWorker.js",
+              "src/fire-messaging-sw.js"
             ],
             "styles": [
               "src/styles.scss"
