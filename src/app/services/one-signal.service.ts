@@ -70,7 +70,7 @@ export class OneSignalService{
           navigator.serviceWorker.getRegistration().then((registration)=>{
             registration?.showNotification(title,{
               body:payload.notification?.body,
-              icon:payload.notification?.icon,
+              icon:"/logo.018d9124.png"
             })
           })
         }
