@@ -12,9 +12,9 @@ firebase.initializeApp({
 });
 
 const messaging = firebase.messaging();
-// messaging.onBackgroundMessage(payload => {
-//     self.registration.showNotification(payload.notification.title, {
-//         body: payload.notification.body,
-//         icon: '/logo.018d9124.png',
-//     });
-// });
+messaging.onBackgroundMessage(payload => {
+    self.registration.showNotification(payload.notification.title, {
+        body: payload.notification.body,
+        icon: '/logo.018d9124.png',
+    });
+});
