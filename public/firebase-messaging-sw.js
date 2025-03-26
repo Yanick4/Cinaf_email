@@ -13,9 +13,8 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 messaging.onBackgroundMessage(payload => {
-    console.log('Message reçu en arrière-plan:', payload);
     self.registration.showNotification(payload.notification.title, {
         body: payload.notification.body,
-        icon: '/assets/icons/icon-192x192.png',
+        icon: '/logo.018d9124.png',
     });
 });
