@@ -4,7 +4,7 @@ import { HttpClientService } from '../http-client.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import { Messaging, getToken, onMessage} from "@angular/fire/messaging"
+import { Messaging, getMessaging, getToken, onMessage} from "@angular/fire/messaging"
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -61,27 +61,30 @@ export class OneSignalService{
     })
   }
 
-  public receive_notification(){
-    onMessage(this._messaging,(payload)=>{
-      console.log("Message received. ",payload)
-      const title:string=payload.notification?.title || "Notification"
-      try {
-        if(Notification.permission==="granted"){
-          navigator.serviceWorker.getRegistration().then((registration)=>{
-            registration?.showNotification(title,{
-              body:payload.notification?.body,
-              icon:"/logo.018d9124.png"
-            })
-          })
+  public receive_notification() {
+    const messaging = getMessaging();
+    onMessage(messaging, (payload) => {
+      console.log("Message received. ", payload);
+      const title = payload.notification?.title || "Notification";
+      const options = {
+        body: payload.notification?.body,
+        icon: "/logo.018d9124.png"
+      };
+      if ('Notification' in window) {
+        if (Notification.permission === "granted") {
+          new Notification(title, options);
+        } else if (Notification.permission !== "denied") {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              new Notification(title, options);
+            }
+          });
         }
-      } catch (error) {
-        console.log("Error showing notification",error)
+      } else {
+        console.log("L'API des Notifications n'est pas prise en charge par ce navigateur.");
       }
-    })
+    });
   }
-
-
-
 
   private async getFCMToken(messaging:any){
     try {
