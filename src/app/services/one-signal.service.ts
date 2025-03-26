@@ -65,13 +65,17 @@ export class OneSignalService{
     onMessage(this._messaging,(payload)=>{
       console.log("Message received. ",payload)
       const title:string=payload.notification?.title || "Notification"
-      if(Notification.permission==="granted"){
-        navigator.serviceWorker.getRegistration().then((registration)=>{
-          registration?.showNotification(title,{
-            body:payload.notification?.body,
-            icon:payload.notification?.icon,
+      try {
+        if(Notification.permission==="granted"){
+          navigator.serviceWorker.getRegistration().then((registration)=>{
+            registration?.showNotification(title,{
+              body:payload.notification?.body,
+              icon:payload.notification?.icon,
+            })
           })
-        })
+        }
+      } catch (error) {
+        console.log("Error showing notification",error)
       }
     })
   }
