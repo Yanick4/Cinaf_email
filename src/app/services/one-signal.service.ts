@@ -59,7 +59,9 @@ export class OneSignalService{
     }).catch((err) => {
       console.log('Notification permission denied', err);
     })
+  }
 
+  public receive_notification(){
     onMessage(this._messaging,(payload)=>{
       console.log("Message received. ",payload)
     })

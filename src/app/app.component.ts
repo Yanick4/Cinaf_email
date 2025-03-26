@@ -19,6 +19,9 @@ export class AppComponent implements OnInit{
   private _object:any
   protected form!:FormGroup
 
+  constructor(){
+    this.oneSignal.receive_notification()
+  }
 
 
   ngOnInit(): void {
