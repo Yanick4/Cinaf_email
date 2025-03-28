@@ -45,7 +45,8 @@ export class TopicMessageSendComponent implements OnInit{
     return new Observable<FormGroup>(form=>{
       form.next(this._builder.group({
         title:["",[Validators.required]],
-        content:["",[Validators.required]]
+        content:["",[Validators.required]],
+        topic_name:["",[Validators.required]]
       })),
       form.complete()
     })
