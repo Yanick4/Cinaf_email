@@ -6,6 +6,7 @@ import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { Messaging, getMessaging, getToken, onMessage} from "@angular/fire/messaging"
 import { environment } from '../../environments/environment';
+import { window } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -49,16 +50,20 @@ export class OneSignalService{
 
 
   public config_notification_push (){
+    if("Notification" in window){
+      Notification.requestPermission().then((permission) => {
+        if(permission==="granted"){
+          this.getFCMToken(this._messaging,false)
+        }else{
+          console.log('Notification permission denied');
+        }
+      }).catch((err) => {
+        console.log('Notification permission denied', err);
+      })
+      this.receive_notification()
+    }
 
-    Notification.requestPermission().then((permission) => {
-      if(permission==="granted"){
-        this.getFCMToken(this._messaging,false)
-      }else{
-        console.log('Notification permission denied');
-      }
-    }).catch((err) => {
-      console.log('Notification permission denied', err);
-    })
+    
   }
 
   public receive_notification() {

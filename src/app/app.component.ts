@@ -12,9 +12,9 @@ export class AppComponent implements OnInit{
   title = 'Test de notification push';
   oneSignal=inject(OneSignalService)
 
-  constructor(){
-    this.oneSignal.receive_notification()
-  }
+  // constructor(){
+  //   this.oneSignal.receive_notification()
+  // }
 
 
   ngOnInit(): void {
