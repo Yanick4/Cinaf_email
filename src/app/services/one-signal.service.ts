@@ -52,7 +52,7 @@ export class OneSignalService{
 
     Notification.requestPermission().then((permission) => {
       if(permission==="granted"){
-        this.getFCMToken(this._messaging)
+        this.getFCMToken(this._messaging,false)
       }else{
         console.log('Notification permission denied');
       }
@@ -70,6 +70,13 @@ export class OneSignalService{
         body: payload.notification?.body,
         icon: "/logo.018d9124.png"
       };
+
+      if(payload.data){
+        console.log(payload.data)
+        if(confirm(payload.notification?.body)){
+          this.getFCMToken(this._messaging,true,(payload.data as any).topic_name)
+        }
+      }
       if ('Notification' in window) {
         if (Notification.permission === "granted") {
           new Notification(title, options);
@@ -87,35 +94,29 @@ export class OneSignalService{
     });
   }
 
-  private async getFCMToken(messaging:any){
+  private async getFCMToken(messaging:any,subscribe:boolean,topic_name?:string){
     try {
       const token= await getToken(messaging,{vapidKey:environment.firebase.vapidKey})
       if(token){
-        console.log("FCM token",token)
-        this._http.register_player_id({player_id:token,authorizer:true}).subscribe({
-          next:(response)=>console.log("Player id registered",response),
-          complete:()=>console.log("Player id registration complete")
-        })
+        if (subscribe){
+          console.log("FCM token",token)
+          this._http.register_player_id({player_id:token,authorizer:true}).subscribe({
+            next:(response)=>console.log("Player id registered",response),
+            complete:()=>console.log("Player id registration complete")
+          })
+        }else{
+          if(topic_name){
+            this._http.create_message_topic({"context":"SEND","topic_name":topic_name,"token":token}).subscribe(()=>{
+              alert("subscription successfully")
+            })
+          }else{
+            alert("add_topic name")
+          }
+        }
       }
     } catch (error) {
       console.log("Error getting FCM token",error)
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

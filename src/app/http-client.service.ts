@@ -12,4 +12,6 @@ export class HttpClientService {
     public register_player_id=(user:any):Observable<any>=>this._http.post<any>(`${this._api_url}/notification/register-player-id`,user)
     public send_notification=(notification:any):Observable<any>=>this._http.post<any>(`${this._api_url}/notification/send-notification`,notification)
     public send_fire_base_notification=(notification:any):Observable<any>=>this._http.post<any>(`${this._api_url}/notification/send-firebase_notification`,notification)
+    public create_topic=(topic:any):Observable<any>=>this._http.post<any>(`${this._api_url}/notification/Subscribe-or-create-topic`,topic)
+    public create_message_topic=(message:any):Observable<any>=>this._http.post<any>(`${this._api_url}/notification/send-message-on-topic`,message)
 }
